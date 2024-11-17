@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f24/proj-courses-f24-04
 owner: ucsb-cs156-f24
 repo_name: proj-courses-f24-04
-pull_requests: [{"author":{"id":"U_kgDOBtyGZQ","is_bot":false,"login":"nikhilvyas109","name":""},"headRefName":"Nikhil-surpressAnnotationWarning","number":12,"title":"Annotation Warning No Longer Appears","url":"https://github.com/ucsb-cs156-f24/proj-courses-f24-04/pull/12"}]
+pull_requests: [{"author":{"id":"U_kgDOBtOw_A","is_bot":false,"login":"PiyushJadhav","name":""},"headRefName":"pj-getActiveQuarterList","number":20,"title":"PJ - getActiveQuarterList","url":"https://github.com/ucsb-cs156-f24/proj-courses-f24-04/pull/20"},{"author":{"id":"U_kgDOBtyGZQ","is_bot":false,"login":"nikhilvyas109","name":""},"headRefName":"Nikhil-surpressAnnotationWarning","number":12,"title":"Annotation Warning No Longer Appears","url":"https://github.com/ucsb-cs156-f24/proj-courses-f24-04/pull/12"}]
