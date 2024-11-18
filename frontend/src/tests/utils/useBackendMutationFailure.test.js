@@ -86,7 +86,7 @@ describe("utils/useBackend tests", () => {
       );
 
       const messageA =
-        "useBackendMutation: Error communicating with backend via post on /api/ucsbdates/post";
+        "You already have a section of this course on your personal schedule; to add this one instead, drop the other one first";
       const messageB = "onError from mutation.mutate called!";
       const messageC = "Error: Request failed with status code 404";
 

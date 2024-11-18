@@ -63,8 +63,8 @@ export function useBackendMutation(
   const queryClient = useQueryClient();
 
   return useMutation((object) => wrappedParams(objectToAxiosParams(object)), {
-    onError: (error) => {
-      const errorMessage = `useBackendMutation: Error communicating with backend via ${error.response.config.method} on ${error.response.config.url}`;
+    onError: (_error) => {
+      const errorMessage = `You already have a section of this course on your personal schedule; to add this one instead, drop the other one first`;
       toast(errorMessage, { type: "error" });
     },
     // Stryker disable all : Not sure how to set up the complex behavior needed to test this
