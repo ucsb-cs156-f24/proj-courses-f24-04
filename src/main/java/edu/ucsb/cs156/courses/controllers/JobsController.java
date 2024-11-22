@@ -53,7 +53,9 @@ public class JobsController extends ApiController {
   @DeleteMapping("/all")
   public Map<String, String> deleteAllJobs() {
     jobsRepository.deleteAll();
-    return Map.of("message", "All jobs deleted");
+    return Map.of(
+        "message", "All jobs deleted"
+    );
   }
 
   @Operation(summary = "Delete specific job record")
