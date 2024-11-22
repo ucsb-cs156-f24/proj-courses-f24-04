@@ -154,15 +154,21 @@ public class PersonalSchedulesController extends ApiController {
       @Parameter(name = "id") @RequestParam Long id,
       @RequestBody @Valid PersonalSchedule incomingSchedule) {
     User currentUser = getCurrentUser().getUser();
+    
     PersonalSchedule personalschedule =
         personalscheduleRepository
             .findByIdAndUser(id, currentUser)
             .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, id));
 
+    Optional<PersonalSchedule> existCheck = personalscheduleRepository.findByUserAndNameAndQuarter(currentUser, incomingSchedule.getName(), incomingSchedule.getQuarter());
+    if (existCheck.isPresent()) {
+      throw new IllegalArgumentException(
+          "A personal schedule with that name already exists in that quarter");
+    }
     personalschedule.setName(incomingSchedule.getName());
     personalschedule.setDescription(incomingSchedule.getDescription());
     personalschedule.setQuarter(incomingSchedule.getQuarter());
-
+      
     personalscheduleRepository.save(personalschedule);
 
     return personalschedule;
