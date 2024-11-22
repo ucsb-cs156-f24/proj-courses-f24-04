@@ -161,7 +161,7 @@ public class PersonalSchedulesController extends ApiController {
             .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, id));
 
     Optional<PersonalSchedule> existCheck = personalscheduleRepository.findByUserAndNameAndQuarter(currentUser, incomingSchedule.getName(), incomingSchedule.getQuarter());
-    if (existCheck.isPresent()) {
+    if (existCheck.isPresent() && !(existCheck.get().getId() == id)) {
       throw new IllegalArgumentException(
           "A personal schedule with that name already exists in that quarter");
     }
@@ -187,7 +187,7 @@ public class PersonalSchedulesController extends ApiController {
             .findById(id)
             .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, id));
     Optional<PersonalSchedule> existCheck = personalscheduleRepository.findByUserAndNameAndQuarter(incomingSchedule.getUser(), incomingSchedule.getName(), incomingSchedule.getQuarter());
-    if (existCheck.isPresent()) {
+    if (existCheck.isPresent() && !(existCheck.get().getId() == id)) {
       throw new IllegalArgumentException(
           "A personal schedule with that name already exists in that quarter");
     }
