@@ -186,7 +186,7 @@ public class PersonalSchedulesController extends ApiController {
         personalscheduleRepository
             .findById(id)
             .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, id));
-    Optional<PersonalSchedule> existCheck = personalscheduleRepository.findByUserAndNameAndQuarter(personalschedule.getUser(), personalschedule.getName(), personalschedule.getQuarter());
+    Optional<PersonalSchedule> existCheck = personalscheduleRepository.findByUserAndNameAndQuarter(incomingSchedule.getUser(), incomingSchedule.getName(), incomingSchedule.getQuarter());
     if (existCheck.isPresent()) {
       throw new IllegalArgumentException(
           "A personal schedule with that name already exists in that quarter");
