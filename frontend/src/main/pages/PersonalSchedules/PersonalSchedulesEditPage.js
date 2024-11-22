@@ -4,7 +4,8 @@ import PersonalScheduleForm from "main/components/PersonalSchedules/PersonalSche
 import { Navigate } from "react-router-dom";
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { Button } from "react-bootstrap";
-import toast from "react-toastify";
+import { toast } from "react-toastify";
+
 export default function PersonalSchedulesEditPage() {
   const createButton = () => {
     return (
@@ -51,10 +52,10 @@ export default function PersonalSchedulesEditPage() {
   const onError = (error) => {
     toast(`Error: ${error.response.data.message}`);
   };
-
+  
   const mutation = useBackendMutation(
     objectToAxiosParams,
-    {onSuccess, onError},
+    { onSuccess, onError },
     // Stryker disable next-line all : hard to set up test for caching
     [`/api/personalschedules/id=${id}`],
   );
