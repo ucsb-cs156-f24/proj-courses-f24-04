@@ -48,7 +48,6 @@ export default function PersonalSchedulesEditPage() {
   });
 
   const onSuccess = () => {};
-
   const onError = (error) => {
     toast(`Error: ${error.response.data.message}`);
   };
