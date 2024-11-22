@@ -160,15 +160,16 @@ public class PersonalSchedulesController extends ApiController {
             .findByIdAndUser(id, currentUser)
             .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, id));
 
-    Optional<PersonalSchedule> existCheck = personalscheduleRepository.findByUserAndNameAndQuarter(currentUser, incomingSchedule.getName(), incomingSchedule.getQuarter());
+    personalschedule.setName(incomingSchedule.getName());
+    personalschedule.setDescription(incomingSchedule.getDescription());
+    personalschedule.setQuarter(incomingSchedule.getQuarter());
+    
+    Optional<PersonalSchedule> existCheck = personalscheduleRepository.findByUserAndNameAndQuarter(currentUser, personalschedule.getName(), personalschedule.getQuarter());
     if (existCheck.isPresent() && !(existCheck.get().getId() == id)) {
       throw new IllegalArgumentException(
           "A personal schedule with that name already exists in that quarter");
     }
-    personalschedule.setName(incomingSchedule.getName());
-    personalschedule.setDescription(incomingSchedule.getDescription());
-    personalschedule.setQuarter(incomingSchedule.getQuarter());
-      
+
     personalscheduleRepository.save(personalschedule);
 
     return personalschedule;
@@ -186,14 +187,16 @@ public class PersonalSchedulesController extends ApiController {
         personalscheduleRepository
             .findById(id)
             .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, id));
-    Optional<PersonalSchedule> existCheck = personalscheduleRepository.findByUserAndNameAndQuarter(incomingSchedule.getUser(), incomingSchedule.getName(), incomingSchedule.getQuarter());
+
+    personalschedule.setName(incomingSchedule.getName());
+    personalschedule.setDescription(incomingSchedule.getDescription());
+    personalschedule.setQuarter(incomingSchedule.getQuarter());
+
+    Optional<PersonalSchedule> existCheck = personalscheduleRepository.findByUserAndNameAndQuarter(personalschedule.getUser(), personalschedule.getName(), personalschedule.getQuarter());
     if (existCheck.isPresent() && !(existCheck.get().getId() == id)) {
       throw new IllegalArgumentException(
           "A personal schedule with that name already exists in that quarter");
     }
-    personalschedule.setName(incomingSchedule.getName());
-    personalschedule.setDescription(incomingSchedule.getDescription());
-    personalschedule.setQuarter(incomingSchedule.getQuarter());
 
     personalscheduleRepository.save(personalschedule);
 
