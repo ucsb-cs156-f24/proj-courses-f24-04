@@ -339,6 +339,22 @@ describe("isLectureWithSections", () => {
     const result = isLectureWithSections(enrollCode, sections);
     expect(result).toBe(true);
   });
+  it("does not include unrelated sections in the courseSections array", () => {
+    const enrollCode = "12345";
+    const sections = [
+      {
+        courseInfo: { courseId: "COURSE1" },
+        section: { enrollCode: "12345", section: "0100" },
+      },
+      {
+        courseInfo: { courseId: "COURSE2" },
+        section: { enrollCode: "67890", section: "0100" },
+      },
+    ];
+
+    const result = isLectureWithSections(enrollCode, sections);
+    expect(result).toBe(false);
+  });
 });
 
 describe("handleAddToSchedule", () => {
@@ -423,38 +439,6 @@ describe("Section tests", () => {
     // Verify that toast was called with the correct parameters
     expect(toast).toHaveBeenCalledWith(
       "New course Created - id: 1 enrollCd: 1234",
-    );
-  });
-
-  test("calls onError when mutation is not successful and calls toast with correct parameters", () => {
-    const mockMutate = jest.fn();
-    const mockMutation = { mutate: mockMutate };
-
-    useBackendMutation.mockReturnValue(mockMutation);
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <SectionsTable sections={fiveSections} />
-        </MemoryRouter>
-      </QueryClientProvider>,
-    );
-
-    // Call the onError function
-    const onError = useBackendMutation.mock.calls[0][1].onError;
-    const mockResponse = {
-      response: {
-        data: {
-          message:
-            "You already have a section of this course on your personal schedule; to add this one instead, drop the other one first.",
-        },
-      },
-    };
-    onError(mockResponse);
-
-    // Verify that toast was called with the correct parameters
-    expect(toast).toHaveBeenCalledWith(
-      "Error: You already have a section of this course on your personal schedule; to add this one instead, drop the other one first.",
     );
   });
 

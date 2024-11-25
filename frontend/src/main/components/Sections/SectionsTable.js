@@ -40,8 +40,6 @@ export function isLectureWithNoSections(enrollCode, sections) {
     // Check if the section number is '0100', indicating a lecture
     if (sectionNumber === "0100") {
       // Filter all sections with the same courseId
-      // Stryker disable all
-      // Stryker restore all
       // Check if there is only one section for the course
       return courseSections.length === 1;
     } else if (sectionNumber.slice(-2) === "00") {
@@ -69,11 +67,11 @@ export function isLectureWithSections(enrollCode, sections) {
 
     if (sectionNumberEnd === "00") {
       // Filter all sections with the same courseId
-      // Stryker disable all
+
       const courseSections = sections.filter(
         (section) => section.courseInfo.courseId === courseId,
       );
-      // Stryker restore all
+
       // Check if there is only one section for the course
       return courseSections.length > 1;
     }
@@ -119,18 +117,13 @@ export const onSuccess = (response) => {
   );
 };
 
-const onError = (error) => {
-  toast(`Error: ${error.response.data.message}`);
-};
-
 export default function SectionsTable({ sections }) {
-  // Stryker restore all
   // Stryker disable BooleanLiteral
   const { data: currentUser } = useCurrentUser();
 
   const mutation = useBackendMutation(
     objectToAxiosParams,
-    { onSuccess, onError },
+    { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
     ["/api/courses/user/all"],
   );
@@ -238,7 +231,6 @@ export default function SectionsTable({ sections }) {
       aggregate: getFirstVal,
       Aggregated: renderInfoLink,
     },
-    // Stryker disable all : difficult to test modal interaction but we should try in future work
     {
       Header: "Action",
       id: "action",
@@ -246,6 +238,7 @@ export default function SectionsTable({ sections }) {
       disableGroupBy: true,
       // No need for accessor if it's purely for actions like expand/collapse
       Cell: ({ row }) => {
+        // Stryker disable all : difficult to test modal interaction
         /* istanbul ignore next : difficult to test modal interaction*/
         if (isSection(row.original.section.section) && currentUser.loggedIn) {
           return (
@@ -290,8 +283,6 @@ export default function SectionsTable({ sections }) {
       },
     },
   ];
-
-  // Stryker enable all
 
   const testid = "SectionsTable";
 
