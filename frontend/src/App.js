@@ -42,7 +42,6 @@ function App() {
             />
             <Route exact path="/admin/updates" element={<AdminUpdatesPage />} />
             <Route path="/admin/jobs" element={<AdminJobsPage />} />
-            <Route exact path="/admin/jobs" component={JobsTable} />
             <Route exact path="/admin/jobs/logs/:id" component={JobLogDetailPage} />
             <Route path="/developer" element={<DeveloperPage />} />
           </>

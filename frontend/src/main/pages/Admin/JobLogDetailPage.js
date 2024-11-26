@@ -6,7 +6,7 @@ const JobLogDetailPage = () => {
   const { id } = useParams();
   const [log, setLog] = useState("");
 
-  const { data, error, status } = useBackend(
+  const { data, error } = useBackend(
     [`/api/jobs/logs/${id}`],
     {
       method: "GET",
