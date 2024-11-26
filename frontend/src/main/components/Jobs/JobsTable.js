@@ -77,6 +77,17 @@ export default function JobsTable({ jobs }) {
   );
 
   return (
+    <OurTable
+      data={jobs}
+      columns={columns}
+      testid={testid}
+      initialState={{ sortBy: sortees }}
+    />
+  );
+}
+
+/*
+  return (
     <div>
       <OurTable
         data={jobs}
@@ -140,3 +151,4 @@ export default function JobsTable({ jobs }) {
     </div>
   );
 }
+*/
