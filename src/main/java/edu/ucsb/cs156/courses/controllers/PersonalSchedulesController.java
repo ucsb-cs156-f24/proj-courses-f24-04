@@ -166,7 +166,7 @@ public class PersonalSchedulesController extends ApiController {
     Optional<PersonalSchedule> existCheck =
         personalscheduleRepository.findByUserAndNameAndQuarter(
             currentUser, personalschedule.getName(), personalschedule.getQuarter());
-    if (existCheck.isPresent()) {
+    if (existCheck.isPresent() && !(existCheck.get().getId() == id)) {
       throw new IllegalArgumentException(
           "A personal schedule with that name already exists in that quarter");
     }
@@ -195,7 +195,7 @@ public class PersonalSchedulesController extends ApiController {
     Optional<PersonalSchedule> existCheck =
         personalscheduleRepository.findByUserAndNameAndQuarter(
             personalschedule.getUser(), personalschedule.getName(), personalschedule.getQuarter());
-    if (existCheck.isPresent()) {
+    if (existCheck.isPresent() && !(existCheck.get().getId() == id)) {
       throw new IllegalArgumentException(
           "A personal schedule with that name already exists in that quarter");
     }
