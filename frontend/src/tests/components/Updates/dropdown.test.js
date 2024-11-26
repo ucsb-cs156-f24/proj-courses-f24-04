@@ -227,4 +227,18 @@ describe("DropdownSelector tests", () => {
     const expectedKey = "dds1";
     expect(screen.queryByTestId(expectedKey)).toBeNull();
   });
+  test("renders 'All Subjects' option correctly", async () => {
+    render(
+      <DropdownSelector
+        subjects={threeSubjects}
+        subject={subject}
+        setSubject={setSubject}
+        controlId="dds1"
+      />,
+    );
+
+    const allSubjectsOption = screen.getByTestId("dds1-option-all");
+    expect(allSubjectsOption).toBeInTheDocument();
+    expect(allSubjectsOption).toHaveValue("ALL");
+  });
 });

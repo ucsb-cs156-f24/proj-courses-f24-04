@@ -36,7 +36,7 @@ const DropdownSelector = ({
         value={subjectState}
         onChange={handleSubjectOnChange}
       >
-        <option key={`${controlId}-option-ALL`} value="ALL">
+        <option data-testid={`${controlId}-option-all`} value="ALL">
           All Subjects
         </option>
         {subjects.map(function (object) {
