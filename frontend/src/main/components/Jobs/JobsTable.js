@@ -1,12 +1,9 @@
-
 import React from "react";
 import OurTable, {
-  PlaintextColumn,
   DateColumn,
 } from "main/components/OurTable";
 
 import { useTable, usePagination } from "react-table";
-import { Link } from "react-router-dom"; 
 
 export default function JobsTable({ jobs }) {
   const testid = "JobsTable";
@@ -33,9 +30,9 @@ export default function JobsTable({ jobs }) {
             <>
               {logOutput.split("\n").slice(0, 10).join("\n")}
               <br />
-              <Link to={`/admin/jobs/logs/${cell.row.original.id}`}>
-                See entire log
-              </Link>
+              <button onClick={() => window.location.href = `/admin/jobs/logs/${cell.row.original.id}`}>
+                View Full Log
+              </button>
             </>
           );
         }
