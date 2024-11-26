@@ -52,7 +52,6 @@ export default function PersonalSchedulesEditPage() {
   const onError = (error) => {
     toast(`Error: ${error.response.data.message}`);
   };
-
   const mutation = useBackendMutation(
     objectToAxiosParams,
     { onSuccess, onError },

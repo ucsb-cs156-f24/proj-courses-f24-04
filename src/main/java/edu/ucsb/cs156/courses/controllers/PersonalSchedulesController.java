@@ -81,8 +81,8 @@ public class PersonalSchedulesController extends ApiController {
   @PostMapping("/post")
   public PersonalSchedule postSchedule(
       @Parameter(name = "name") @RequestParam String name,
-      @Parameter(name = "quarter") @RequestParam String quarter,
-      @Parameter(name = "description") Optional<String> description) {
+      @Parameter(name = "description") @RequestParam String description,
+      @Parameter(name = "quarter") @RequestParam String quarter) {
     CurrentUser currentUser = getCurrentUser();
     log.info("currentUser={}", currentUser);
 
@@ -94,7 +94,7 @@ public class PersonalSchedulesController extends ApiController {
     PersonalSchedule personalschedule = new PersonalSchedule();
     personalschedule.setUser(currentUser.getUser());
     personalschedule.setName(name);
-    personalschedule.setDescription(description.orElse(""));
+    personalschedule.setDescription(description);
     personalschedule.setQuarter(quarter);
 
     Optional<PersonalSchedule> existCheck =
@@ -192,8 +192,7 @@ public class PersonalSchedulesController extends ApiController {
 
     personalschedule.setName(incomingSchedule.getName());
     personalschedule.setDescription(incomingSchedule.getDescription());
-    personalschedule.setQuarter(incomingSchedule.getQuarter());
-    
+    personalschedule.setQuarter(incomingSchedule.getQuarter());    
     Optional<PersonalSchedule> existCheck =
         personalscheduleRepository.findByUserAndNameAndQuarter(
             personalschedule.getUser(), personalschedule.getName(), personalschedule.getQuarter());
@@ -201,7 +200,6 @@ public class PersonalSchedulesController extends ApiController {
       throw new IllegalArgumentException(
           "A personal schedule with that name already exists in that quarter");
     }
-
     personalscheduleRepository.save(personalschedule);
 
     return personalschedule;
