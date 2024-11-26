@@ -158,12 +158,11 @@ public class PersonalSchedulesController extends ApiController {
         personalscheduleRepository
             .findByIdAndUser(id, currentUser)
             .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, id));
-    
-    
+
     personalschedule.setName(incomingSchedule.getName());
     personalschedule.setDescription(incomingSchedule.getDescription());
     personalschedule.setQuarter(incomingSchedule.getQuarter());
-    
+
     Optional<PersonalSchedule> existCheck =
         personalscheduleRepository.findByUserAndNameAndQuarter(
             currentUser, personalschedule.getName(), personalschedule.getQuarter());
@@ -192,7 +191,7 @@ public class PersonalSchedulesController extends ApiController {
 
     personalschedule.setName(incomingSchedule.getName());
     personalschedule.setDescription(incomingSchedule.getDescription());
-    personalschedule.setQuarter(incomingSchedule.getQuarter());    
+    personalschedule.setQuarter(incomingSchedule.getQuarter());
     Optional<PersonalSchedule> existCheck =
         personalscheduleRepository.findByUserAndNameAndQuarter(
             personalschedule.getUser(), personalschedule.getName(), personalschedule.getQuarter());
