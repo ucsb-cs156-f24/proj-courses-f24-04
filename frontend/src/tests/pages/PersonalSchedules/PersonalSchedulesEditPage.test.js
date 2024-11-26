@@ -129,14 +129,13 @@ describe("PersonalSchedulesEditPage tests", () => {
       });
     });
 
-
     const queryClient = new QueryClient();
 
     test("returns error message when backend encounters an error", async () => {
       axiosMock
         .onPut("/api/personalschedules")
         .reply(500, { message: "Backend encountering error" });
-      
+
       render(
         <QueryClientProvider client={queryClient}>
           <MemoryRouter>
@@ -161,10 +160,7 @@ describe("PersonalSchedulesEditPage tests", () => {
       expect(mockToast).toHaveBeenCalledWith(
         "Error: Backend encountering error",
       );
-
-      
     });
-
 
     test("renders without crashing", () => {
       axiosMock.onGet("/api/personalschedules").reply(200, []);
@@ -177,7 +173,6 @@ describe("PersonalSchedulesEditPage tests", () => {
       );
     });
 
-    
     test("renders 'Back' button", () => {
       const queryClient = new QueryClient();
       axiosMock.onGet(`/api/personalschedules?id=17`).reply(200, []);
@@ -316,10 +311,5 @@ describe("PersonalSchedulesEditPage tests", () => {
         </QueryClientProvider>,
       );
     });
-
-
-
-
   });
-
 });
