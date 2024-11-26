@@ -51,6 +51,15 @@ export default function JobsTable({ jobs }) {
     // Stryker disable next-line all
     [],
   );
+  return (
+    <OurTable
+      data={jobs}
+      columns={columns}
+      testid={testid}
+      initialState={{ sortBy: sortees }}
+    />
+  );
+}
 /*
   const {
     getTableProps,
@@ -76,16 +85,6 @@ export default function JobsTable({ jobs }) {
     usePagination
   );
 */
-  return (
-    <OurTable
-      data={jobs}
-      columns={columns}
-      testid={testid}
-      initialState={{ sortBy: sortees }}
-    />
-  );
-}
-
 /*
   return (
     <div>

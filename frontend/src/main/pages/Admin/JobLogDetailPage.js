@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useBackend } from "main/utils/useBackend";
+import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 
 const JobLogDetailPage = () => {
   const { id } = useParams();
-  const [log, setLog] = useState("");
 
-  const { data, error } = useBackend(
+  const { data, error} = useBackend(
     [`/api/jobs/logs/${id}`],
     {
       method: "GET",
@@ -15,21 +14,12 @@ const JobLogDetailPage = () => {
     []
   );
 
-  useEffect(() => {
-    if (data) {
-      setLog(data.logOutput);  // Assuming data contains the full log in logOutput
-    }
-  }, [data]);
-
-  if (error) {
-    return <div>Error loading log: {error.message}</div>;
-  }
-
   return (
-    <div>
-      <h2>Job Log: {id}</h2>
-      <textarea value={log} rows="20" cols="100" readOnly />
-    </div>
+    
+    <BasicLayout>
+      <h2 className="p-3">{data}{error}</h2>
+      <h2 className="p-3">Job Status</h2>
+    </BasicLayout>
   );
 };
 
