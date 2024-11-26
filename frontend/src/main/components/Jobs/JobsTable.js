@@ -51,7 +51,7 @@ export default function JobsTable({ jobs }) {
     // Stryker disable next-line all
     [],
   );
-
+/*
   const {
     getTableProps,
     getTableBodyProps,
@@ -75,7 +75,7 @@ export default function JobsTable({ jobs }) {
     },
     usePagination
   );
-
+*/
   return (
     <OurTable
       data={jobs}
