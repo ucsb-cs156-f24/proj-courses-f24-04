@@ -7,7 +7,6 @@ import DropdownSelector from "main/components/Updates/dropdown";
 import { oneSubject } from "fixtures/subjectFixtures";
 import { threeSubjects } from "fixtures/subjectFixtures";
 import { outOfOrderSubjects } from "fixtures/subjectFixtures";
-import { Dropdown } from "react-bootstrap";
 
 jest.mock("react", () => ({
   ...jest.requireActual("react"),
