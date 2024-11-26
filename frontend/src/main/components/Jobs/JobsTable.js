@@ -3,7 +3,7 @@ import OurTable, {
   DateColumn,
 } from "main/components/OurTable";
 
-import { useTable, usePagination } from "react-table";
+// import { useTable, usePagination } from "react-table";
 
 export default function JobsTable({ jobs }) {
   const testid = "JobsTable";
