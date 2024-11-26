@@ -287,29 +287,5 @@ describe("PersonalSchedulesEditPage tests", () => {
         </QueryClientProvider>,
       );
     });
-
-    test("prevents users from making duplicate personal schedules through edit", () => {
-      const queryClient = new QueryClient();
-      axiosMock.onGet("/api/personalschedules").reply(200, []);
-      render(
-        <QueryClientProvider client={queryClient}>
-          <MemoryRouter>
-            <PersonalSchedulesEditPage />
-          </MemoryRouter>
-        </QueryClientProvider>,
-      );
-    });
-
-    test("prevents users from making duplicate personal schedules through edit", () => {
-      const queryClient = new QueryClient();
-      axiosMock.onGet("/api/personalschedules").reply(200, []);
-      render(
-        <QueryClientProvider client={queryClient}>
-          <MemoryRouter>
-            <PersonalSchedulesEditPage />
-          </MemoryRouter>
-        </QueryClientProvider>,
-      );
-    });
   });
 });
