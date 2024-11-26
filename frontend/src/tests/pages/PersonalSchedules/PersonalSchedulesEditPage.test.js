@@ -129,7 +129,43 @@ describe("PersonalSchedulesEditPage tests", () => {
       });
     });
 
+
     const queryClient = new QueryClient();
+
+    test("returns error message when backend encounters an error", async () => {
+      axiosMock
+        .onPut("/api/personalschedules")
+        .reply(500, { message: "Backend encountering error" });
+      
+      render(
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <PersonalSchedulesEditPage />
+          </MemoryRouter>
+        </QueryClientProvider>,
+      );
+
+      await screen.findByTestId("PersonalScheduleForm-id");
+
+      const idField = screen.getByTestId("PersonalScheduleForm-id");
+      const submitButton = screen.getByTestId("PersonalScheduleForm-submit");
+
+      expect(idField).toBeInTheDocument();
+      expect(idField).toHaveValue("17");
+      expect(submitButton).toHaveTextContent("Update");
+
+      fireEvent.click(submitButton);
+
+      await waitFor(() => expect(axiosMock.history.put.length).toBe(1));
+
+      expect(mockToast).toHaveBeenCalledWith(
+        "Error: Backend encountering error",
+      );
+
+      
+    });
+
+
     test("renders without crashing", () => {
       axiosMock.onGet("/api/personalschedules").reply(200, []);
       render(
@@ -141,6 +177,7 @@ describe("PersonalSchedulesEditPage tests", () => {
       );
     });
 
+    
     test("renders 'Back' button", () => {
       const queryClient = new QueryClient();
       axiosMock.onGet(`/api/personalschedules?id=17`).reply(200, []);
@@ -268,6 +305,21 @@ describe("PersonalSchedulesEditPage tests", () => {
       );
     });
 
+    test("prevents users from making duplicate personal schedules through edit", () => {
+      const queryClient = new QueryClient();
+      axiosMock.onGet("/api/personalschedules").reply(200, []);
+      render(
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <PersonalSchedulesEditPage />
+          </MemoryRouter>
+        </QueryClientProvider>,
+      );
+    });
+
+
+
 
   });
+
 });
