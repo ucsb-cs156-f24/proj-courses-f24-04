@@ -16,6 +16,20 @@ const AdminJobsPage = () => {
 
   // test job
 
+  // API for purging job log
+  const objectToAxiosParamsPurgeJobLog = () => ({
+    url: "/api/jobs/all",
+    method: "DELETE",
+  });
+
+  const purgeJobLogMutation = useBackendMutation(objectToAxiosParamsPurgeJobLog, {}, [
+    "/api/jobs/all", // Invalidate the cache for job logs
+  ]);
+
+  const submitPurgeJobLog = async () => {
+    purgeJobLogMutation.mutate();
+  };
+
   const objectToAxiosParamsTestJob = (data) => ({
     url: `/api/jobs/launch/testjob?fail=${data.fail}&sleepMs=${data.sleepMs}`,
     method: "POST",
@@ -152,12 +166,23 @@ const AdminJobsPage = () => {
           </Accordion.Item>
         ))}
       </Accordion>
-
+  
       <h2 className="p-3">Job Status</h2>
-
+      
       <JobsTable jobs={jobs} />
+  
+      <div className="mt-3">
+        <button
+          className="btn btn-danger"
+          onClick={submitPurgeJobLog}
+          disabled={purgeJobLogMutation.isLoading}
+        >
+          {purgeJobLogMutation.isLoading ? "Purging..." : "Purge Job Log"}
+        </button>
+      </div>
     </BasicLayout>
   );
+  
 };
 
 export default AdminJobsPage;
