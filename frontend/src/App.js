@@ -6,7 +6,7 @@ import AdminUpdatesPage from "main/pages/Admin/AdminUpdatesPage";
 import AdminLoadSubjectsPage from "main/pages/Admin/AdminLoadSubjectsPage";
 import AdminJobsPage from "main/pages/Admin/AdminJobsPage";
 import DeveloperPage from "main/pages/DeveloperPage"; // route from /developer to DeveloperPage
-
+import JobLogDetailPage from "main/pages/Admin/JobLogDetailPage";
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -42,6 +42,8 @@ function App() {
             />
             <Route exact path="/admin/updates" element={<AdminUpdatesPage />} />
             <Route path="/admin/jobs" element={<AdminJobsPage />} />
+            <Route exact path="/admin/jobs" component={JobsTable} />
+            <Route exact path="/admin/jobs/logs/:id" component={JobLogDetailPage} />
             <Route path="/developer" element={<DeveloperPage />} />
           </>
         )}
