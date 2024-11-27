@@ -6,6 +6,7 @@ import CourseDetailsTable from "main/components/CourseDetails/CourseDetailsTable
 import { yyyyqToQyy } from "main/utils/quarterUtilities";
 import CourseDescriptionTable from "main/components/Courses/CourseDescriptionTable";
 import GradeHistoryGraphs from "main/components/GradeHistory/GradeHistoryGraph";
+import FinalsInfoDisplay from "main/components/CourseDetails/FinalsInfoDisplay";
 
 export default function CourseDetailsIndexPage() {
   // Stryker disable next-line all : Can't test state because hook is internal
@@ -54,6 +55,19 @@ export default function CourseDetailsIndexPage() {
     },
   );
 
+  // Fetch Finals Info
+  const { data: finalsInfo } = useBackend(
+    [`/api/public/finalsinfo?quarterYYYYQ=${qtr}&enrollCd=${enrollCode}`],
+    {
+      method: "GET",
+      url: `/api/public/finalsinfo`,
+      params: {
+        quarterYYYYQ: qtr,
+        enrollCd: enrollCode,
+      },
+    }
+  );
+
   return (
     <BasicLayout>
       <div className="pt-2">
@@ -66,6 +80,7 @@ export default function CourseDetailsIndexPage() {
         {moreDetails && <CourseDetailsTable details={[moreDetails]} />}
         {moreDetails && <CourseDescriptionTable course={moreDetails} />}
         {gradeHistory && <GradeHistoryGraphs gradeHistory={gradeHistory} />}
+        {finalsInfo && <FinalsInfoDisplay finalsInfo={[finalsInfo]} />}
       </div>
     </BasicLayout>
   );
