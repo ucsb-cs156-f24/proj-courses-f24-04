@@ -65,7 +65,7 @@ export default function CourseDetailsIndexPage() {
         quarterYYYYQ: qtr,
         enrollCd: enrollCode,
       },
-    }
+    },
   );
 
   return (

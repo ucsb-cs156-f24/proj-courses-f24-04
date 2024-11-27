@@ -35,9 +35,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <FinalsInfoDisplay
-            finalsInfo={[finalsInfoFixtures.oneFinalsInfo]}
-          />
+          <FinalsInfoDisplay finalsInfo={[finalsInfoFixtures.oneFinalsInfo]} />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -51,12 +49,12 @@ describe("UserTable tests", () => {
       "End Time",
     ];
     const expectedFields = [
-        "hasFinals",
-        "comments",
-        "examDay",
-        "examDate",
-        "beginTime",
-        "endTime",
+      "hasFinals",
+      "comments",
+      "examDay",
+      "examDate",
+      "beginTime",
+      "endTime",
     ];
 
     const testId = "FinalsInfoDisplay";
