@@ -12,6 +12,8 @@ import UpdateCoursesByQuarterJobForm from "main/components/Jobs/UpdateCoursesByQ
 import UpdateCoursesByQuarterRangeJobForm from "main/components/Jobs/UpdateCoursesByQuarterRangeJobForm";
 
 const AdminJobsPage = () => {
+  console.log("Loading AdminJobsPage..." + new Date().toLocaleString());
+
   const refreshJobsIntervalMilliseconds = 5000;
 
   // purge job log API call
